@@ -1,5 +1,5 @@
 {% set name = "stern" %}
-{% set version = "1.21.0" %}
+{% set version = "1.25.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,15 @@ package:
 
 source:
   url: https://github.com/stern/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 0ccf1375ee3c20508c37de288a46faa6b0e4dffb3a3749f4b699a30f95e861be
+  sha256: 9742fa8d9c4b75bf0b261c42996d26c0f706400c043f3f83d159238326c717ea
 
 build:
   number: 0
 
 requirements:
   build:
-    - {{ compiler('go') }} 1.17
+    - {{ compiler('go') }} 1.19
+    - file  # [not win]
     - go-licenses >=0.0.44
 
 test:
@@ -32,8 +33,8 @@ about:
     - license-files/
   summary: Multi pod and container log tailing for Kubernetes
   description: |
-     Stern allows you to tail multiple pods on Kubernetes and multiple containers within the pod. Each result is color coded for quicker debugging.
-     Fork of discontinued https://github.com/wercker/stern .
+    Stern allows you to tail multiple pods on Kubernetes and multiple containers within the pod. Each result is color coded for quicker debugging.
+    Fork of discontinued https://github.com/wercker/stern .
   doc_url: https://github.com/stern/stern
   dev_url: https://github.com/stern/stern
 
