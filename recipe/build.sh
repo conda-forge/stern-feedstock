@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 set -eux
 
@@ -8,13 +8,22 @@ LDFLAGS="-X github.com/stern/stern/cmd.version=$PKG_VERSION-$PKG_BUILDNUM"
 go build -v -ldflags="$LDFLAGS" -o $PREFIX/bin/stern .
 
 # Cross-compilation: check correct architecture was built
-declare -A expected
-expected["darwin amd64"]='Mach-O.+x86_64'
-expected["darwin arm64"]='Mach-O.+arm64'
-expected["linux amd64"]='ELF.+x86-64'
-expected["linux arm64"]='ELF.+aarch64'
 if [ -n "$GOARCH" ]; then
-  file $PREFIX/bin/stern | grep -E "${expected["$GOOS $GOARCH"]}"
+  if [ "$GOOS" = darwin ]; then
+    if [ "$GOARCH" = arm64 ]; then
+      PATTERN="Mach-O.+arm64"
+    else
+      PATTERN="Mach-O.+x86_64"
+    fi
+  else
+    if [ "$GOARCH" = arm64 ]; then
+      PATTERN="ELF.+aarch64"
+    else
+      PATTERN="ELF.+x86-64"
+    fi
+  fi
+
+  file $PREFIX/bin/stern | grep -E "$PATTERN"
 fi
 
 go-licenses save . --save_path=./license-files
