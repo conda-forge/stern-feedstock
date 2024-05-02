@@ -1,5 +1,5 @@
 {% set name = "stern" %}
-{% set version = "1.28.0" %}
+{% set version = "1.29.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,16 +7,16 @@ package:
 
 source:
   url: https://github.com/stern/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 7d0914cc3a3b884cce5bcbeb439f5c651c72f0737ba9517b663d7f911804489e
+  sha256: 4be6932a97da0e36aea1c6cffaad559caea19f4948dcef8dc1686d5c2e0d3045
 
 build:
   number: 0
 
 requirements:
   build:
-    - {{ compiler('go') }} 1.19
+    - {{ compiler('go') }} 1.22
     - file  # [not win]
-    - go-licenses >=0.0.44
+    - go-licenses >=1.6.0
 
 test:
   commands:
