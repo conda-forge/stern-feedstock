@@ -14,9 +14,9 @@ build:
 
 requirements:
   build:
-    - {{ compiler('go') }} 1.19
+    - {{ compiler('go') }} 1.22
     - file  # [not win]
-    - go-licenses >=0.0.44
+    - go-licenses >=1.6.0
 
 test:
   commands:
