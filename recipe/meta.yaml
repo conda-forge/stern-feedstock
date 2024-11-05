@@ -1,5 +1,5 @@
 {% set name = "stern" %}
-{% set version = "1.30.0" %}
+{% set version = "1.31.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/stern/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 0197c241e847c9068ff10d93aa9059349421a0dfd689df4027490852c2d80ef5
+  sha256: b74b001035637c4e7058845005ee16a86421355baf9ee38d466dea8fd8aa0a02
 
 build:
   number: 0
